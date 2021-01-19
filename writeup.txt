@@ -1,0 +1,15 @@
+To add a syscall, we first add the syscall to the syscall table.
+
+Then we define the implementation of the syscall (sh_task_info) in kernel/sys.c using the macro DEFINE_SYSCALL in kernel space.
+Particularly, this syscall takes in two inputs -> the pid and the filename (which are given by the user from stdin).
+
+If a process with the given pid exists, it prints the process info to the log file. The folloeing attributes are printed - name, pid, state, priority and rt_priority.
+
+Then to the given file, these attributes are written to within the kernel space.
+
+This syscall is called from the C program test.c. It also prints to stdout value returned by syscall.
+
+Errors handled are-
+
+	In case there is no task of the mentioned pid.
+	In case there is error in opening the file.
